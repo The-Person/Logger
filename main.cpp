@@ -1,38 +1,36 @@
 #include <iostream>
 #include <fstream>
-
 #include <ctime>
-
 #include <string>
 
 using namespace std;
 
 class Logger {
     public:
-    Logger (string Log){
-    myfile.open (Log.c_str(), ios::app); //opens file
+    Logger (string Blargh){
+    theFile.open (Blargh.c_str(), ios::app); //opens file that logger logs to
 }
-        void writeTomyFile (string Log){
+        void writeTotheFile (string Blargh){
             time_t t = time (0);
             struct tm *  now = localtime ( & t );
             time_t rawtime;
             struct tm * timeinfo;
-            char buffer[80];
+            char buffer[50];
             time (&rawtime);
             timeinfo = localtime (&rawtime);
             strftime(buffer, 80, "%d-%m-%Y %I:%M:%S", timeinfo);
             std::string str (buffer); //gets current time
-            myfile << str << "," << Log <<endl; //new row with commas separating columns
+            theFile << str << "," << Blargh <<endl; //makes new row in file with commas separating columns
 }
 ~Logger(){
-    myfile.close();//Closes file after ending Logger class
+    theFile.close();//Closes file after ending Logger class
 }
 private:
-    ofstream myfile;
+    ofstream theFile;
 
 };
 int main( int argc, char* argv[] ){
-    Logger Log ("exampleLogger.csv");
-    Log.writeTomyFile ("I hate this");//Log to CSV file
+    Logger Blargh ("ItsmyLogger.csv");
+    Blargh.writeTotheFile ("I made my own");//Log to CSV file
     return 0;
 }
